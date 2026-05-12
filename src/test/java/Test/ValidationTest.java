@@ -19,7 +19,10 @@ public class ValidationTest extends BaseTest {
     public void testEmptyMandatoryFields() {
         vp.navigateToAddEmployee();
         vp.clickSave();
-        Assert.assertTrue(vp.getValidationErrorsCount() >= 2);
+        Assert.assertTrue(
+                vp.getValidationErrorsCount() >= 2,
+                "Expected at least 2 validation errors but got: " + vp.getValidationErrorsCount()
+        );
     }
 
     @Test(priority = 2)
@@ -27,13 +30,19 @@ public class ValidationTest extends BaseTest {
         vp.navigateToAddEmployee();
         vp.createDummyEmployee();
         String error = vp.enterInvalidDateAndGetError("99-99-9999");
-        Assert.assertTrue(error.toLowerCase().contains("valid"));
+        Assert.assertTrue(
+                error.toLowerCase().contains("valid"),
+                "Expected error message to contain 'valid' but got: " + error
+        );
     }
 
     @Test(priority = 3)
     public void testDropdownSelectability() {
         vp.navigateToAddEmployee();
         vp.createDummyEmployee();
-        Assert.assertTrue(vp.verifyDropdownSelection());
+        Assert.assertTrue(
+                vp.verifyDropdownSelection(),
+                "Dropdown selection failed — no options found or selection not registered"
+        );
     }
 }

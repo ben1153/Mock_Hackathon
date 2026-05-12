@@ -34,11 +34,7 @@ public class EmployeePage {
     }
 
     public void addEmployee(String fName, String lName) {
-
-        // Open Add form
         wait.until(ExpectedConditions.elementToBeClickable(addBtn)).click();
-
-        // Wait for form fields
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstName));
 
         // Fill data
